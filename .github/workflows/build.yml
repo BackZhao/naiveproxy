@@ -122,26 +122,4 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: ${{ env.BUNDLE }}.tar.xz
-          path: ./${{ env.BUNDLE }}.tar.xz
-      - name: Upload naiveproxy assets
-        if: ${{ github.event_name == 'release' }}
-        run: hub release edit -a ${{ env.BUNDLE }}.tar.xz -m "" "${GITHUB_REF##*/}"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Pack cronet assets
-        if: ${{ github.event_name == 'release' && ! contains(matrix.extra, 'build_static=true') }}
-        run: |
-          mv out/Release/cronet ${{ env.CRONET_BUNDLE }}
-          tar cJf ${{ env.CRONET_BUNDLE }}.tar.xz ${{ env.CRONET_BUNDLE }}
-          openssl sha256 ${{ env.CRONET_BUNDLE }}.tar.xz >sha256sum.txt
-          echo "SHA256SUM=$(cut -d' ' -f2 sha256sum.txt)" >>$GITHUB_ENV
-      - uses: actions/upload-artifact@v2
-        if: ${{ github.event_name == 'release' && ! contains(matrix.extra, 'build_static=true') }}
-        with:
-          name: ${{ env.CRONET_BUNDLE }}.tar.xz sha256 ${{ env.SHA256SUM }}
-          path: src/sha256sum.txt
-      - name: Upload cronet assets
-        if: ${{ github.event_name == 'release' && ! contains(matrix.extra, 'build_static=true') }}
-        run: hub release edit -a ${{ env.CRONET_BUNDLE }}.tar.xz -m "" "${GITHUB_REF##*/}"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          path: src/${{ env.BUNDLE }}.tar.xz
