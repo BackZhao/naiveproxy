@@ -21,7 +21,7 @@ else
   subtarget='generic'
   SDK_PATH=openwrt-sdk-$release-${target}_gcc-${gcc_ver}_${abi}.Linux-x86_64
 fi
-SDK_URL=https://downloads.openwrt.org/releases/$release/targets/$target/$subtarget/$SDK_PATH.tar.xz
+SDK_URL=https://repo.jing.rocks/openwrt/releases/$release/targets/$target/$subtarget/$SDK_PATH.tar.xz
 rm -rf $SDK_PATH
 aria2c -x 16 $SDK_URL
 tar -xf $SDK_PATH.tar.xz
