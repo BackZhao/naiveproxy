@@ -141,7 +141,7 @@ jobs:
       - name: Install APT packages
         run: |
           sudo apt update
-          sudo apt install ninja-build pkg-config qemu-user ccache bubblewrap
+          sudo apt install ninja-build pkg-config qemu-user ccache bubblewrap aria2
           sudo apt remove -y qemu-user-binfmt
           sudo dpkg -i qemu-user-static_7.0+dfsg-6_amd64.deb
           # libc6-i386 interferes with x86 build

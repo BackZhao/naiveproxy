@@ -23,7 +23,8 @@ else
 fi
 SDK_URL=https://downloads.openwrt.org/releases/$release/targets/$target/$subtarget/$SDK_PATH.tar.xz
 rm -rf $SDK_PATH
-curl $SDK_URL | tar xJf -
+aria2c -x 16 $SDK_URL
+tar -xf $SDK_PATH.tar.xz
 cd $SDK_PATH
 full_root=staging_dir/toolchain-*_gcc-${gcc_ver}_${abi}
 cat >include.txt <<EOF
